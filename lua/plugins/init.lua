@@ -229,9 +229,6 @@ local default_plugins = {
       { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
       { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
     },
-    init = function()
-      require("core.utils").load_mappings("comment")
-    end,
     config = function(_, _opts)
       require("Comment").setup({
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
