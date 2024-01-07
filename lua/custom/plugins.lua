@@ -93,13 +93,13 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter,
+    opts = overrides.treesitter
   },
 
-  {
-    "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
-  },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   opts = overrides.nvimtree
+  -- },
 
   -- Install a plugin
   {
