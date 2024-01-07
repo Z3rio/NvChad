@@ -96,11 +96,6 @@ local plugins = {
     opts = overrides.treesitter
   },
 
-  -- {
-  --   "nvim-tree/nvim-tree.lua",
-  --   opts = overrides.nvimtree
-  -- },
-
   -- Install a plugin
   {
     "max397574/better-escape.nvim",
