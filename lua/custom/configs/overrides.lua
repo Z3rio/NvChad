@@ -37,10 +37,6 @@ M.treesitter = {
     --   "python"
     -- },
   },
-
-  context_commentstring = {
-    enable = true,
-  },
 }
 
 M.mason = {
