@@ -118,21 +118,6 @@ local plugins = {
   },
 
   {
-    "Z3rio/spotify.nvim",
-
-    config = function()
-      require("spotify").setup({
-        debug = true,
-        clientId = "",
-      })
-    end,
-
-    lazy = false,
-    dev = true,
-    enabled = false,
-  },
-
-  {
     "nvim-treesitter/nvim-treesitter-context",
 
     config = function()
@@ -174,46 +159,6 @@ local plugins = {
   },
 
   {
-    "Z3rio/FiveM.nvim",
-
-    config = function()
-      require("fivem").setup({})
-    end,
-
-    dependencies = {
-      "rcarriga/nvim-notify",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-
-    lazy = false,
-  },
-
-  {
-    "MunifTanjim/nui.nvim",
-    lazy = false,
-  },
-
-  {
-    "rcarriga/nvim-notify",
-    lazy = false,
-    config = function()
-      require("notify").setup({
-        background_colour = "#000000",
-      })
-    end,
-  },
-
-  {
-    "stevearc/dressing.nvim",
-    config = function()
-      require("custom.configs.dressing")
-    end,
-    lazy = false,
-  },
-
-  {
     "andweeb/presence.nvim",
 
     lazy = false,
@@ -222,20 +167,6 @@ local plugins = {
       require("custom.configs.presence")
     end,
   },
-
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
-
-  -- All NvChad plugins are lazy-loaded by default
-  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   lazy = false,
-  -- }
 }
 
 return plugins
