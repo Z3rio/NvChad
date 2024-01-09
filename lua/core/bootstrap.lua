@@ -1,5 +1,6 @@
 local M = {}
 local fn = vim.fn
+local post_install = require ("core.post_install")
 
 M.echo = function(str)
   vim.cmd "redraw"
@@ -22,7 +23,7 @@ M.lazy = function(install_path)
   require "plugins"
 
   -- mason packages & show post_bootstrap screen
-  require ("core.bootstrap").post_install()
+  post_install()
 end
 
 return M
