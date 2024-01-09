@@ -16,6 +16,14 @@ M.general = {
   },
 
   n = {
+    [";"] = { ":", "enter command mode", opts = { nowait = true } },
+    ["<leader>oe"] = { function()
+      vim.cmd ":Explore"
+    end, "Open netrw explorer"},
+    ["<leader>of "] = { function()
+      vim.cmd ":Explorer"
+    end, "Open windows file explorer"},
+
     ["<Esc>"] = { "<cmd> noh <CR>", "Clear highlights" },
     -- switch between windows
     ["<C-h>"] = { "<C-w>h", "Window left" },
@@ -71,6 +79,33 @@ M.general = {
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
   },
+}
+
+M.dap = {
+  plugin = true,
+  n = {
+    ["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>" },
+    ["<leader>dus"] = {
+      function ()
+        local widgets = require('dap.ui.widgets');
+        local sidebar = widgets.sidebar(widgets.scopes);
+        sidebar.open();
+      end,
+      "Open debugging sidebar"
+    }
+  }
+}
+
+M.crates = {
+  plugin = true,
+  n = {
+    ["<leader>rcu"] = {
+      function ()
+        require('crates').upgrade_all_crates()
+      end,
+      "update crates"
+    }
+  }
 }
 
 M.lspconfig = {
@@ -331,5 +366,11 @@ M.gitsigns = {
     },
   },
 }
+
+for i = 1, 9, 1 do
+  vim.keymap.set("n", string.format("<A-%s>", i), function()
+    vim.api.nvim_set_current_buf(vim.t.bufs[i])
+  end)
+end
 
 return M

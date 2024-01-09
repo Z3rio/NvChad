@@ -1,6 +1,6 @@
 local opt = vim.opt
 local g = vim.g
-local config = require("core.utils").load_config()
+local wo = vim.wo
 
 -------------------------------------- globals -----------------------------------------
 g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
@@ -12,6 +12,15 @@ opt.updatetime = 100
 
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
+wo.relativenumber = true
+
+-- Dap
+g.dap_virtual_text = true
+
+-- Netrw
+g.netrw_browse_split = 0
+g.netrw_banner = 0
+g.netrw_winsize = 25
 
 -- Indenting
 opt.expandtab = true
@@ -89,3 +98,6 @@ autocmd("BufWritePost", {
 vim.api.nvim_create_user_command("Update", function()
   require "core.updater"()
 end, {})
+
+require("core.commands")
+require("core.terminal")

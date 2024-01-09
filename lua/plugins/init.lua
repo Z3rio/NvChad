@@ -7,7 +7,7 @@ local default_plugins = {
     name = "catppuccin", 
     priority = 1000,
     config = function()
-      require("custom.configs.theme")
+      require("plugins.configs.theme")
     end
   },
 
@@ -19,7 +19,6 @@ local default_plugins = {
     config = function(_, opts)
       require("colorizer").setup(opts)
 
-      -- execute colorizer as soon as possible
       vim.defer_fn(function()
         require("colorizer").attach_to_buffer(0)
       end, 0)
@@ -71,12 +70,10 @@ local default_plugins = {
     end,
   },
 
-  -- git stuff
   {
     "lewis6991/gitsigns.nvim",
     ft = { "gitcommit", "diff" },
     init = function()
-      -- load gitsigns only when a git file is opened
       vim.api.nvim_create_autocmd({ "BufRead" }, {
         group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
         callback = function()
@@ -103,8 +100,44 @@ local default_plugins = {
       require("gitsigns").setup(opts)
     end,
   },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
 
-  -- lsp stuff
+    config = function()
+      require("treesitter-context").setup({
+        enable = true,
+        max_lines = 0,
+        min_window_height = 0,
+        line_numbers = true,
+        multiline_threshold = 20,
+        trim_scope = "outer",
+        mode = "cursor",
+        separator = nil,
+        zindex = 20,
+        on_attach = nil,
+      })
+    end,
+
+    lazy = false,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        autotag = {
+          enable = true,
+        },
+      })
+    end,
+
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+
+    lazy = false,
+  },
   {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
@@ -115,7 +148,6 @@ local default_plugins = {
       dofile(vim.g.base46_cache .. "mason")
       require("mason").setup(opts)
 
-      -- custom nvchad cmd to install all mason binaries listed
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         if opts.ensure_installed and #opts.ensure_installed > 0 then
           vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
@@ -125,7 +157,88 @@ local default_plugins = {
       vim.g.mason_binaries_list = opts.ensure_installed
     end,
   },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    lazy = false,
+    config = function(_, opts)
+      require("nvim-dap-virtual-text").setup()
+    end
+  },
+  {
+    "andweeb/presence.nvim",
 
+    lazy = false,
+
+    config = function()
+      require("plugins.configs.presence")
+    end,
+  },
+  {
+    "max397574/better-escape.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
+  {
+    "Z3rio/NvChad-customdata",
+
+    build = function()
+      os.execute("cd " .. vim.fn.stdpath("data") .. "/lazy/NvChad-customdata/fivem && npm install && npm run build")
+    end,
+    update = function()
+      os.execute("cd " .. vim.fn.stdpath("data") .. "/lazy/NvChad-customdata/fivem && npm install && npm run build")
+    end,
+    lazy = false,
+  },
+  {
+    "mattn/emmet-vim",
+    opts = {},
+    lazy = false,
+    config = function() end,
+  },
+  {
+    "wakatime/vim-wakatime",
+    lazy = false
+  },
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+    init = function ()
+      vim.g.rustfmt_autosave = 1
+    end
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
+    'saecki/crates.nvim',
+    ft = {"toml"},
+    config = function(_, opts)
+      local crates  = require('crates')
+      crates.setup(opts)
+      require('cmp').setup.buffer({
+        sources = { { name = "crates" }}
+      })
+      crates.show()
+      require("core.utils").load_mappings("crates")
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    init = function()
+      require("core.utils").load_mappings("dap")
+    end
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    ft = "rust",
+    dependencies = "neovim/nvim-lspconfig",
+    config = function(_, opts)
+      require('rust-tools').setup(opts)
+    end
+  },
   {
     "neovim/nvim-lspconfig",
 
@@ -133,7 +246,7 @@ local default_plugins = {
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require("custom.configs.null-ls")
+          require("plugins.configs.null-ls")
         end,
       },
       "Z3rio/NvChad-customdata"
@@ -144,17 +257,14 @@ local default_plugins = {
     end,
     config = function()
       require("plugins.configs.lspconfig")
-      require("custom.configs.lspconfig")
     end,
   },
 
-  -- load luasnips + cmp related in insert mode only
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
       {
-        -- snippet plugin
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
@@ -163,7 +273,6 @@ local default_plugins = {
         end,
       },
 
-      -- autopairing of (){}[] etc
       {
         "windwp/nvim-autopairs",
         opts = {
@@ -173,13 +282,11 @@ local default_plugins = {
         config = function(_, opts)
           require("nvim-autopairs").setup(opts)
 
-          -- setup cmp for autopairs
           local cmp_autopairs = require("nvim-autopairs.completion.cmp")
           require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
       },
 
-      -- cmp sources plugins
       {
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
@@ -213,7 +320,6 @@ local default_plugins = {
     end,
   },
 
-  -- file managing , picker etc
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -229,7 +335,6 @@ local default_plugins = {
       local telescope = require("telescope")
       telescope.setup(opts)
 
-      -- load extensions
       if opts.extensions_list then
         for _, ext in ipairs(opts.extensions_list) do
           telescope.load_extension(ext)
@@ -238,7 +343,6 @@ local default_plugins = {
     end,
   },
 
-  -- Only load whichkey after all the gui
   {
     "folke/which-key.nvim",
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },

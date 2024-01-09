@@ -1,9 +1,5 @@
 local M = {}
 
-M.options = {
-  nvchad_branch = "main",
-}
-
 M.ui = {
   lsp_semantic_tokens = false, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 

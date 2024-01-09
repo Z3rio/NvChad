@@ -2,6 +2,8 @@ dofile(vim.g.base46_cache .. "lsp")
 
 local M = {}
 local utils = require("core.utils")
+local servers = { "html", "tsserver", "clangd", "cssls" }
+local lspconfig = require("lspconfig")
 
 -- export on_attach & capabilities for custom lspconfigs
 
@@ -51,10 +53,13 @@ function CombineTable(table1, table2)
   return retVal
 end
 
-require('lspconfig').cssls.setup({
-  on_attach = M.on_attach,
-  capabilities = M.capabilities
-})
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+  }
+end
+
 require("lspconfig").lua_ls.setup({
   on_attach = M.on_attach,
   capabilities = M.capabilities,
