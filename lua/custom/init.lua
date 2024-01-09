@@ -15,3 +15,9 @@ vim.api.nvim_create_user_command("Exp", OpenExplorer, {})
 vim.api.nvim_create_user_command("Explorer", OpenExplorer, {})
 
 vim.wo.relativenumber = true
+
+vim.g.dap_virtual_text = true
+
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25

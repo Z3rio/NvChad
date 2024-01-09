@@ -1,8 +1,4 @@
--- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
--- List of all default plugins & their definitions
-
 local default_plugins = {
-
   "nvim-lua/plenary.nvim",
 
   {
