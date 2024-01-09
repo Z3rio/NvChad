@@ -158,7 +158,7 @@ M.lspconfig = {
 
     ["<leader>ra"] = {
       function()
-        require("nvchad.renamer").open()
+        require("core.renamer").open()
       end,
       "LSP rename",
     },

@@ -2,9 +2,6 @@ local opt = vim.opt
 local g = vim.g
 local wo = vim.wo
 
--------------------------------------- globals -----------------------------------------
-g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
-
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
 opt.showmode = false

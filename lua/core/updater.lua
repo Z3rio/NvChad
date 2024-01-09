@@ -1,5 +1,3 @@
-dofile(vim.g.base46_cache .. "nvchad_updater")
-
 local nvim_config = vim.fn.stdpath "config"
 local config_branch = "main"
 

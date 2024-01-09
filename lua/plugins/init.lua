@@ -27,9 +27,6 @@ local default_plugins = {
 
   {
     "nvim-tree/nvim-web-devicons",
-    config = function()
-      dofile(vim.g.base46_cache .. "devicons")
-    end,
   },
 
   {
@@ -43,7 +40,6 @@ local default_plugins = {
     end,
     config = function(_, opts)
       require("core.utils").load_mappings("blankline")
-      dofile(vim.g.base46_cache .. "blankline")
       require("indent_blankline").setup(opts)
     end,
   },
@@ -64,7 +60,6 @@ local default_plugins = {
       return require("plugins.configs.treesitter")
     end,
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.install").compilers = { "zig" }
       require("nvim-treesitter.configs").setup(opts)
     end,
@@ -96,7 +91,6 @@ local default_plugins = {
       return require("plugins.configs.others").gitsigns
     end,
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "git")
       require("gitsigns").setup(opts)
     end,
   },
@@ -145,7 +139,6 @@ local default_plugins = {
       return require("plugins.configs.mason")
     end,
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "mason")
       require("mason").setup(opts)
 
       vim.api.nvim_create_user_command("MasonInstallAll", function()
@@ -331,7 +324,6 @@ local default_plugins = {
       return require("plugins.configs.telescope")
     end,
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "telescope")
       local telescope = require("telescope")
       telescope.setup(opts)
 
@@ -351,13 +343,12 @@ local default_plugins = {
     end,
     cmd = "WhichKey",
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "whichkey")
       require("which-key").setup(opts)
     end,
   },
 }
 
-local config = require("core.utils").load_config()
+local config = require("core.config")
 
 if #config.plugins > 0 then
   table.insert(default_plugins, { import = config.plugins })
