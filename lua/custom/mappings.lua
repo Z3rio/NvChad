@@ -4,6 +4,12 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
+    ["<leader>oe"] = { function()
+      vim.cmd ":Explore"
+    end, "Open netrw explorer"},
+    ["<leader>of "] = { function()
+      vim.cmd ":Explorer"
+    end, "Open windows file explorer"}
   },
 }
 
