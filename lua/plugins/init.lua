@@ -1,16 +1,14 @@
 local default_plugins = {
   "nvim-lua/plenary.nvim",
-
-  { 
-    "catppuccin/nvim", 
+  {
+    "catppuccin/nvim",
     lazy = false,
-    name = "catppuccin", 
+    name = "catppuccin",
     priority = 1000,
     config = function()
       require("plugins.configs.theme")
-    end
+    end,
   },
-
   {
     "NvChad/nvim-colorizer.lua",
     init = function()
@@ -24,11 +22,7 @@ local default_plugins = {
       end, 0)
     end,
   },
-
-  {
-    "nvim-tree/nvim-web-devicons",
-  },
-
+  "nvim-tree/nvim-web-devicons",
   {
     "lukas-reineke/indent-blankline.nvim",
     version = "2.20.7",
@@ -43,13 +37,12 @@ local default_plugins = {
       require("indent_blankline").setup(opts)
     end,
   },
-
   {
     "nvim-treesitter/nvim-treesitter",
     init = function()
       require("core.utils").lazy_load("nvim-treesitter")
       vim.g.skip_ts_context_commentstring_module = true
-      require('ts_context_commentstring').setup({})
+      require("ts_context_commentstring").setup({})
     end,
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -64,7 +57,6 @@ local default_plugins = {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
-
   {
     "lewis6991/gitsigns.nvim",
     ft = { "gitcommit", "diff" },
@@ -72,18 +64,16 @@ local default_plugins = {
       vim.api.nvim_create_autocmd({ "BufRead" }, {
         group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
         callback = function()
-          vim.fn.jobstart({"git", "-C", vim.loop.cwd(), "rev-parse"},
-            {
-              on_exit = function(_, return_code)
-                if return_code == 0 then
-                  vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
-                  vim.schedule(function()
-                    require("lazy").load { plugins = { "gitsigns.nvim" } }
-                  end)
-                end
+          vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
+            on_exit = function(_, return_code)
+              if return_code == 0 then
+                vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
+                vim.schedule(function()
+                  require("lazy").load({ plugins = { "gitsigns.nvim" } })
+                end)
               end
-            }
-          )
+            end,
+          })
         end,
       })
     end,
@@ -114,7 +104,6 @@ local default_plugins = {
 
     lazy = false,
   },
-
   {
     "windwp/nvim-ts-autotag",
 
@@ -155,7 +144,7 @@ local default_plugins = {
     lazy = false,
     config = function(_, opts)
       require("nvim-dap-virtual-text").setup()
-    end
+    end,
   },
   {
     "andweeb/presence.nvim",
@@ -192,27 +181,27 @@ local default_plugins = {
   },
   {
     "wakatime/vim-wakatime",
-    lazy = false
+    lazy = false,
   },
   {
     "rust-lang/rust.vim",
     ft = "rust",
-    init = function ()
+    init = function()
       vim.g.rustfmt_autosave = 1
-    end
+    end,
   },
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
-    'saecki/crates.nvim',
-    ft = {"toml"},
+    "saecki/crates.nvim",
+    ft = { "toml" },
     config = function(_, opts)
-      local crates  = require('crates')
+      local crates = require("crates")
       crates.setup(opts)
-      require('cmp').setup.buffer({
-        sources = { { name = "crates" }}
+      require("cmp").setup.buffer({
+        sources = { { name = "crates" } },
       })
       crates.show()
       require("core.utils").load_mappings("crates")
@@ -222,15 +211,15 @@ local default_plugins = {
     "mfussenegger/nvim-dap",
     init = function()
       require("core.utils").load_mappings("dap")
-    end
+    end,
   },
   {
     "simrat39/rust-tools.nvim",
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
     config = function(_, opts)
-      require('rust-tools').setup(opts)
-    end
+      require("rust-tools").setup(opts)
+    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -242,7 +231,7 @@ local default_plugins = {
           require("plugins.configs.null-ls")
         end,
       },
-      "Z3rio/NvChad-customdata"
+      "Z3rio/NvChad-customdata",
     },
 
     init = function()
@@ -252,7 +241,6 @@ local default_plugins = {
       require("plugins.configs.lspconfig")
     end,
   },
-
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -295,16 +283,15 @@ local default_plugins = {
       require("cmp").setup(opts)
     end,
   },
-
   {
     "numToStr/Comment.nvim",
     keys = {
-      { "gcc", mode = "n", desc = "Comment toggle current line" },
-      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n", desc = "Comment toggle current block" },
-      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+      { "gcc", mode = "n",          desc = "Comment toggle current line" },
+      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n",          desc = "Comment toggle current block" },
+      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
     },
     config = function(_, _opts)
       require("Comment").setup({
@@ -312,7 +299,6 @@ local default_plugins = {
       })
     end,
   },
-
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -334,10 +320,9 @@ local default_plugins = {
       end
     end,
   },
-
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+    keys = { "<leader>", "<c-r>", "<c-w>", "\"", "'", "`", "c", "v", "g" },
     init = function()
       require("core.utils").load_mappings("whichkey")
     end,

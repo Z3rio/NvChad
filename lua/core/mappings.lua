@@ -17,12 +17,18 @@ M.general = {
 
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
-    ["<leader>oe"] = { function()
-      vim.cmd ":Explore"
-    end, "Open netrw explorer"},
-    ["<leader>of "] = { function()
-      vim.cmd ":Explorer"
-    end, "Open windows file explorer"},
+    ["<leader>oe"] = {
+      function()
+        vim.cmd(":Explore")
+      end,
+      "Open netrw explorer",
+    },
+    ["<leader>of"] = {
+      function()
+        vim.cmd(":Explorer")
+      end,
+      "Open windows file explorer",
+    },
 
     ["<Esc>"] = { "<cmd> noh <CR>", "Clear highlights" },
     -- switch between windows
@@ -45,17 +51,17 @@ M.general = {
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
     -- empty mode is same as using <cmd> :map
     -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
+    ["j"] = { "v:count || mode(1)[0:1] == \"no\" ? \"j\" : \"gj\"", "Move down", opts = { expr = true } },
+    ["k"] = { "v:count || mode(1)[0:1] == \"no\" ? \"k\" : \"gk\"", "Move up", opts = { expr = true } },
+    ["<Up>"] = { "v:count || mode(1)[0:1] == \"no\" ? \"k\" : \"gk\"", "Move up", opts = { expr = true } },
+    ["<Down>"] = { "v:count || mode(1)[0:1] == \"no\" ? \"j\" : \"gj\"", "Move down", opts = { expr = true } },
 
     -- new buffer
     ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
 
     ["<leader>fm"] = {
       function()
-        vim.lsp.buf.format { async = true }
+        vim.lsp.buf.format({ async = true })
       end,
       "LSP formatting",
     },
@@ -66,18 +72,18 @@ M.general = {
   },
 
   v = {
-    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
+    ["<Up>"] = { "v:count || mode(1)[0:1] == \"no\" ? \"k\" : \"gk\"", "Move up", opts = { expr = true } },
+    ["<Down>"] = { "v:count || mode(1)[0:1] == \"no\" ? \"j\" : \"gj\"", "Move down", opts = { expr = true } },
     ["<"] = { "<gv", "Indent line" },
     [">"] = { ">gv", "Indent line" },
   },
 
   x = {
-    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
+    ["j"] = { "v:count || mode(1)[0:1] == \"no\" ? \"j\" : \"gj\"", "Move down", opts = { expr = true } },
+    ["k"] = { "v:count || mode(1)[0:1] == \"no\" ? \"k\" : \"gk\"", "Move up", opts = { expr = true } },
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
+    ["p"] = { "p:let @+=@0<CR>:let @\"=@0<CR>", "Dont copy replaced text", opts = { silent = true } },
   },
 }
 
@@ -86,26 +92,26 @@ M.dap = {
   n = {
     ["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>" },
     ["<leader>dus"] = {
-      function ()
-        local widgets = require('dap.ui.widgets');
-        local sidebar = widgets.sidebar(widgets.scopes);
-        sidebar.open();
+      function()
+        local widgets = require("dap.ui.widgets")
+        local sidebar = widgets.sidebar(widgets.scopes)
+        sidebar.open()
       end,
-      "Open debugging sidebar"
-    }
-  }
+      "Open debugging sidebar",
+    },
+  },
 }
 
 M.crates = {
   plugin = true,
   n = {
     ["<leader>rcu"] = {
-      function ()
-        require('crates').upgrade_all_crates()
+      function()
+        require("crates").upgrade_all_crates()
       end,
-      "update crates"
-    }
-  }
+      "update crates",
+    },
+  },
 }
 
 M.lspconfig = {
@@ -179,21 +185,21 @@ M.lspconfig = {
 
     ["<leader>lf"] = {
       function()
-        vim.diagnostic.open_float { border = "rounded" }
+        vim.diagnostic.open_float({ border = "rounded" })
       end,
       "Floating diagnostic",
     },
 
     ["[d"] = {
       function()
-        vim.diagnostic.goto_prev { float = { border = "rounded" } }
+        vim.diagnostic.goto_prev({ float = { border = "rounded" } })
       end,
       "Goto prev",
     },
 
     ["]d"] = {
       function()
-        vim.diagnostic.goto_next { float = { border = "rounded" } }
+        vim.diagnostic.goto_next({ float = { border = "rounded" } })
       end,
       "Goto next",
     },
@@ -267,13 +273,13 @@ M.whichkey = {
   n = {
     ["<leader>wK"] = {
       function()
-        vim.cmd "WhichKey"
+        vim.cmd("WhichKey")
       end,
       "Which-key all keymaps",
     },
     ["<leader>wk"] = {
       function()
-        local input = vim.fn.input "WhichKey: "
+        local input = vim.fn.input("WhichKey: ")
         vim.cmd("WhichKey " .. input)
       end,
       "Which-key query lookup",
@@ -294,7 +300,7 @@ M.blankline = {
 
         if ok then
           vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
-          vim.cmd [[normal! _]]
+          vim.cmd([[normal! _]])
         end
       end,
 
@@ -374,3 +380,4 @@ for i = 1, 9, 1 do
 end
 
 return M
+

@@ -1,6 +1,6 @@
 -- normal commands
 function OpenExplorer()
-    vim.cmd "!explorer.exe . &"
+  vim.cmd("!explorer.exe . &")
 end
 
 vim.api.nvim_create_user_command("Exp", OpenExplorer, {})
@@ -14,3 +14,4 @@ autocmd("VimResized", {
   pattern = "*",
   command = "tabdo wincmd =",
 })
+

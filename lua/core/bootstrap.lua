@@ -1,9 +1,9 @@
 local M = {}
 local fn = vim.fn
-local post_install = require ("core.post_install")
+local post_install = require("core.post_install")
 
 M.echo = function(str)
-  vim.cmd "redraw"
+  vim.cmd("redraw")
   vim.api.nvim_echo({ { str, "Bold" } }, true, {})
 end
 
@@ -14,13 +14,13 @@ end
 
 M.lazy = function(install_path)
   --------- lazy.nvim ---------------
-  M.echo "  Installing lazy.nvim & plugins ..."
+  M.echo("  Installing lazy.nvim & plugins ...")
   local repo = "https://github.com/folke/lazy.nvim.git"
-  shell_call { "git", "clone", "--filter=blob:none", "--branch=stable", repo, install_path }
+  shell_call({ "git", "clone", "--filter=blob:none", "--branch=stable", repo, install_path })
   vim.opt.rtp:prepend(install_path)
 
   -- install plugins
-  require "plugins"
+  require("plugins")
 
   -- mason packages & show post_bootstrap screen
   post_install()

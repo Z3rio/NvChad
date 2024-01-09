@@ -1,4 +1,4 @@
-local nvim_config = vim.fn.stdpath "config"
+local nvim_config = vim.fn.stdpath("config")
 local config_branch = "main"
 
 local api = vim.api
@@ -10,19 +10,19 @@ local content = { " ", " ", "" }
 local header = " 󰓂 Update status "
 
 return function()
-  local local_branch = vim.fn.system { "git", "-C", nvim_config, "branch", "--show-current" }
+  local local_branch = vim.fn.system({ "git", "-C", nvim_config, "branch", "--show-current" })
   local_branch = local_branch:gsub("\n", "")
 
   if local_branch ~= config_branch then
-    print "Updated local branch! reopen neovim & run NvChadUpdate command again"
-    vim.fn.system { "git", "-C", nvim_config, "switch", config_branch }
-    vim.cmd "exit"
+    print("Updated local branch! reopen neovim & run NvChadUpdate command again")
+    vim.fn.system({ "git", "-C", nvim_config, "switch", config_branch })
+    vim.cmd("exit")
   end
 
   -- create buffer
   local buf = vim.api.nvim_create_buf(false, true)
 
-  vim.cmd "sp"
+  vim.cmd("sp")
 
   vim.api.nvim_set_current_buf(buf)
 
@@ -36,7 +36,7 @@ return function()
 
   -- set lines & highlight for updater title
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
-  local nvUpdater = api.nvim_create_namespace "nvUpdater"
+  local nvUpdater = api.nvim_create_namespace("nvUpdater")
   api.nvim_buf_add_highlight(buf, nvUpdater, "nvUpdaterTitle", 1, 0, -1)
 
   local git_outputs = {} -- list of commits fill here after 3-4 seconds
@@ -75,7 +75,7 @@ return function()
 
         -- git log --format="format:%h: %s"  HEAD..origin/somebranch
         git_outputs = vim.fn.systemlist(
-          "git -C " .. nvim_config .. ' log --format="format:%h: %s" ' .. head_hash[1] .. "..origin/" .. config_branch
+          "git -C " .. nvim_config .. " log --format=\"format:%h: %s\" " .. head_hash[1] .. "..origin/" .. config_branch
         )
 
         if #git_outputs == 0 then
@@ -117,8 +117,8 @@ return function()
       vim.fn.jobstart({ "git", "pull" }, { silent = true, cwd = nvim_config })
       require("lazy").sync()
 
-      if vim.fn.exists ":MasonUpdate" > 0 then
-        vim.cmd "MasonUpdate"
+      if vim.fn.exists(":MasonUpdate") > 0 then
+        vim.cmd("MasonUpdate")
       end
     end)
   end
@@ -136,3 +136,4 @@ return function()
     end,
   })
 end
+

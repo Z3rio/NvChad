@@ -3,7 +3,7 @@ local opt_local = vim.opt_local
 
 local function screen()
   local text_on_screen = {
-    "enjoy neovim lol"
+    "enjoy neovim lol",
   }
 
   local buf = api.nvim_create_buf(false, true)
@@ -11,7 +11,7 @@ local function screen()
   vim.opt_local.filetype = "post_bootstrap"
   api.nvim_buf_set_lines(buf, 0, -1, false, text_on_screen)
 
-  local nvpostscreen = api.nvim_create_namespace "nvpostscreen"
+  local nvpostscreen = api.nvim_create_namespace("nvpostscreen")
 
   for i = 1, #text_on_screen do
     api.nvim_buf_add_highlight(buf, nvpostscreen, "LazyCommit", i, 0, -1)
@@ -34,7 +34,7 @@ return function()
   api.nvim_buf_delete(0, { force = true }) -- close previously opened lazy window
 
   vim.schedule(function()
-    vim.cmd "MasonInstallAll"
+    vim.cmd("MasonInstallAll")
 
     -- Keep track of which mason pkgs get installed
     local packages = table.concat(vim.g.mason_binaries_list, " ")
@@ -43,13 +43,14 @@ return function()
       packages = string.gsub(packages, pkg.name:gsub("%-", "%%-"), "") -- rm package name
 
       -- run above screen func after all pkgs are installed.
-      if packages:match "%S" == nil then
+      if packages:match("%S") == nil then
         vim.schedule(function()
           api.nvim_buf_delete(0, { force = true })
-          vim.cmd "echo '' | redraw" -- clear cmdline
+          vim.cmd("echo '' | redraw") -- clear cmdline
           screen()
         end)
       end
     end)
   end)
 end
+

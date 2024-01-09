@@ -7,16 +7,16 @@ M.ui = {
   cmp = {
     icons = true,
     lspkind_text = true,
-    style = "default", -- default/flat_light/flat_dark/atom/atom_colored
-    border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
+    style = "default",            -- default/flat_light/flat_dark/atom/atom_colored
+    border_color = "grey_fg",     -- only applicable for "default" style, use color names from base30 variables
     selected_item_bg = "colored", -- colored / simple
   },
 }
 
-M.plugins = "" -- path i.e "custom.plugins", so make custom/plugins.lua file
+M.plugins = ""                                     -- path i.e "custom.plugins", so make custom/plugins.lua file
 
-M.lazy_nvim = require "plugins.configs.lazy_nvim" -- config for lazy.nvim startup options
+M.lazy_nvim = require("plugins.configs.lazy_nvim") -- config for lazy.nvim startup options
 
-M.mappings = require "core.mappings"
+M.mappings = require("core.mappings")
 
 return M

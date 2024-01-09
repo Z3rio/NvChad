@@ -52,10 +52,10 @@ function CombineTable(table1, table2)
 end
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  lspconfig[lsp].setup({
     on_attach = M.on_attach,
     capabilities = M.capabilities,
-  }
+  })
 end
 
 require("lspconfig").lua_ls.setup({
@@ -67,7 +67,11 @@ require("lspconfig").lua_ls.setup({
       diagnostics = {
         globals = {
           "vim",
-          "MySQL", "QBCore", "ESX", "MySQL.Async", "MySQL.Sync"
+          "MySQL",
+          "QBCore",
+          "ESX",
+          "MySQL.Async",
+          "MySQL.Sync",
         },
       },
       workspace = {
