@@ -1,32 +1,14 @@
 local default_plugins = {
   "nvim-lua/plenary.nvim",
 
-  {
-    "Z3rio/base46",
-    branch = "v2.0",
-    build = function()
-      require("base46").load_all_highlights()
-    end,
-  },
-
-  {
-    "NvChad/ui",
-    branch = "v2.0",
+  { 
+    "catppuccin/nvim", 
     lazy = false,
-    init = function()
-      require("custom.ui")
-    end,
-  },
-
-  {
-    "NvChad/nvterm",
-    init = function()
-      require("core.utils").load_mappings("nvterm")
-    end,
-    config = function(_, opts)
-      require("base46.term")
-      require("nvterm").setup(opts)
-    end,
+    name = "catppuccin", 
+    priority = 1000,
+    config = function()
+      require("custom.configs.theme")
+    end
   },
 
   {
@@ -46,12 +28,8 @@ local default_plugins = {
 
   {
     "nvim-tree/nvim-web-devicons",
-    opts = function()
-      return { override = require("nvchad.icons.devicons") }
-    end,
-    config = function(_, opts)
+    config = function()
       dofile(vim.g.base46_cache .. "devicons")
-      require("nvim-web-devicons").setup(opts)
     end,
   },
 
@@ -152,10 +130,13 @@ local default_plugins = {
     "neovim/nvim-lspconfig",
 
     dependencies = {
-      "jose-elias-alvarez/null-ls.nvim",
-      config = function()
-        require("custom.configs.null-ls")
-      end,
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+          require("custom.configs.null-ls")
+        end,
+      },
+      "Z3rio/NvChad-customdata"
     },
 
     init = function()
@@ -249,8 +230,10 @@ local default_plugins = {
       telescope.setup(opts)
 
       -- load extensions
-      for _, ext in ipairs(opts.extensions_list) do
-        telescope.load_extension(ext)
+      if opts.extensions_list then
+        for _, ext in ipairs(opts.extensions_list) do
+          telescope.load_extension(ext)
+        end
       end
     end,
   },

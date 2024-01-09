@@ -8,6 +8,7 @@ autocmd("VimResized", {
 
 -- Misc
 require("custom.commands")
+require("custom.terminal")
 
 vim.wo.relativenumber = true
 

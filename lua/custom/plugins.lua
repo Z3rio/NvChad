@@ -14,6 +14,7 @@ local plugins = {
           require("custom.configs.null-ls")
         end,
       },
+      "Z3rio/NvChad-customdata"
     },
     config = function()
       require("plugins.configs.lspconfig")
@@ -166,7 +167,7 @@ local plugins = {
     config = function()
       require("custom.configs.presence")
     end,
-  },
+  }
 }
 
 return plugins
