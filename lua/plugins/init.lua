@@ -147,6 +147,15 @@ local default_plugins = {
     end,
   },
   {
+    "andweeb/presence.nvim",
+
+    lazy = false,
+
+    config = function()
+      require("plugins.configs.presence")
+    end,
+  },
+  {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
