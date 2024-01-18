@@ -147,7 +147,7 @@ local default_plugins = {
     end,
   },
   {
-    "andweeb/presence.nvim",
+    "Z3rio/presence.nvim",
 
     lazy = false,
 
