@@ -163,14 +163,14 @@ M.lspconfig = {
       "Floating diagnostic",
     },
 
-    ["[d"] = {
+    ["<leader>lp"] = {
       function()
         vim.diagnostic.goto_prev({ float = { border = "rounded" } })
       end,
       "Goto prev",
     },
 
-    ["]d"] = {
+    ["<leader>ln"] = {
       function()
         vim.diagnostic.goto_next({ float = { border = "rounded" } })
       end,
