@@ -180,3 +180,4 @@ vim.cmd.colorscheme("catppuccin")
 
 -- custom highlighting
 vim.cmd.highlight({"WinSeparator", "guifg=#43435B"})
+vim.cmd.highlight({"MsgArea", "guibg=#171724"})

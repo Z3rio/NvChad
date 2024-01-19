@@ -201,6 +201,14 @@ local default_plugins = {
     end,
   },
   {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    lazy = false,
+    config = function()
+      require("plugins.configs.statusline")
+    end
+  },
+  {
     "numToStr/Comment.nvim",
     keys = {
       { "gcc", mode = "n",          desc = "Comment toggle current line" },
