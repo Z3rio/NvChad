@@ -168,51 +168,17 @@ local default_plugins = {
     lazy = false,
   },
   {
-    "mattn/emmet-vim",
-    opts = {},
-    lazy = false,
-    config = function() end,
-  },
-  {
     "wakatime/vim-wakatime",
     lazy = false,
-  },
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
   },
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
-    "saecki/crates.nvim",
-    ft = { "toml" },
-    config = function(_, opts)
-      local crates = require("crates")
-      crates.setup(opts)
-      require("cmp").setup.buffer({
-        sources = { { name = "crates" } },
-      })
-      crates.show()
-      require("core.utils").load_mappings("crates")
-    end,
-  },
-  {
     "mfussenegger/nvim-dap",
     init = function()
       require("core.utils").load_mappings("dap")
-    end,
-  },
-  {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    config = function(_, opts)
-      require("rust-tools").setup(opts)
     end,
   },
   {
@@ -239,15 +205,6 @@ local default_plugins = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      {
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("plugins.configs.others").luasnip(opts)
-        end,
-      },
-
       {
         "windwp/nvim-autopairs",
         opts = {
@@ -312,17 +269,6 @@ local default_plugins = {
           telescope.load_extension(ext)
         end
       end
-    end,
-  },
-  {
-    "folke/which-key.nvim",
-    keys = { "<leader>", "<c-r>", "<c-w>", "\"", "'", "`", "c", "v", "g" },
-    init = function()
-      require("core.utils").load_mappings("whichkey")
-    end,
-    cmd = "WhichKey",
-    config = function(_, opts)
-      require("which-key").setup(opts)
     end,
   },
 }
