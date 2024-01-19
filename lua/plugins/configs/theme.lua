@@ -50,8 +50,6 @@ require("catppuccin").setup({
 			beacon = false,
 			cmp = true,
 			coc_nvim = false,
-			dap = true,
-			dap_ui = true,
 			dashboard = false,
 			dropbar = { enabled = true, color_mode = true },
 			fern = false,
@@ -181,4 +179,4 @@ require("catppuccin").setup({
 vim.cmd.colorscheme("catppuccin")
 
 -- custom highlighting
-vim.cmd.highlight({"WinSeparator", "guifg=#ffffff"})
+vim.cmd.highlight({"WinSeparator", "guifg=#43435B"})

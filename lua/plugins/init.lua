@@ -85,26 +85,6 @@ local default_plugins = {
     end,
   },
   {
-    "nvim-treesitter/nvim-treesitter-context",
-
-    config = function()
-      require("treesitter-context").setup({
-        enable = true,
-        max_lines = 0,
-        min_window_height = 0,
-        line_numbers = true,
-        multiline_threshold = 20,
-        trim_scope = "outer",
-        mode = "cursor",
-        separator = nil,
-        zindex = 20,
-        on_attach = nil,
-      })
-    end,
-
-    lazy = false,
-  },
-  {
     "windwp/nvim-ts-autotag",
 
     config = function()
@@ -140,13 +120,6 @@ local default_plugins = {
     end,
   },
   {
-    "theHamsta/nvim-dap-virtual-text",
-    lazy = false,
-    config = function(_, opts)
-      require("nvim-dap-virtual-text").setup()
-    end,
-  },
-  {
     "Z3rio/presence.nvim",
 
     lazy = false,
@@ -174,12 +147,6 @@ local default_plugins = {
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  {
-    "mfussenegger/nvim-dap",
-    init = function()
-      require("core.utils").load_mappings("dap")
-    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -220,7 +187,6 @@ local default_plugins = {
       },
 
       {
-        "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",

@@ -11,9 +11,6 @@ opt.clipboard = "unnamedplus"
 opt.cursorline = true
 wo.relativenumber = true
 
--- Dap
-g.dap_virtual_text = true
-
 -- Netrw
 g.netrw_browse_split = 0
 g.netrw_banner = 0
