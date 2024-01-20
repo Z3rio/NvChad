@@ -10,6 +10,15 @@ local default_plugins = {
     end,
   },
   {
+    "Z3rio/Spotify.nvim",
+    lazy = false,
+    dev = true,
+
+    config = function()
+      require("plugins.configs.spotify")
+    end,
+  },
+  {
     "NvChad/nvim-colorizer.lua",
     init = function()
       require("core.utils").lazy_load("nvim-colorizer.lua")
@@ -255,7 +264,7 @@ local default_plugins = {
     config = function(_, opts)
       require("which-key").setup(opts)
     end,
-  },
+  },a
 }
 
 local config = require("core.config")

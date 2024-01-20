@@ -156,6 +156,20 @@ ins_left {
 }
 
 ins_left {
+  function()
+    return (require("spotify").getCurrentSong()):sub(1, -2)
+  end,
+  padding = { right = 4 },
+  color = { fg = colors.green },
+}
+
+ins_left {
+  function()
+    return '%='
+  end,
+}
+
+ins_left {
   -- Lsp server name .
   function()
     local msg = 'No Active Lsp'
