@@ -28,6 +28,11 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
 
+-- Folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldenable = false
+
 -- Numbers
 opt.number = true
 opt.numberwidth = 2
