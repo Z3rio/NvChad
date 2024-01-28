@@ -128,6 +128,7 @@ ins_left {
 
 ins_left {
   'filename',
+  path = 1,
   cond = conditions.buffer_not_empty,
   color = { fg = colors.magenta, gui = 'bold' },
 }
@@ -155,19 +156,19 @@ ins_left {
   end,
 }
 
-ins_left {
-  function()
-    return (require("spotify").getCurrentSong()):sub(1, -2)
-  end,
-  padding = { right = 4 },
-  color = { fg = colors.green },
-}
+-- ins_left {
+--   function()
+--     return (require("spotify").getCurrentSong()):sub(1, -2)
+--   end,
+--   padding = { right = 4 },
+--   color = { fg = colors.green },
+-- }
 
-ins_left {
-  function()
-    return '%='
-  end,
-}
+-- ins_left {
+--   function()
+--     return '%='
+--   end,
+-- }
 
 ins_left {
   -- Lsp server name .
