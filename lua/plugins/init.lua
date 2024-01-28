@@ -48,6 +48,7 @@ local default_plugins = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    tag = "v0.9.2",
     init = function()
       require("core.utils").lazy_load("nvim-treesitter")
       vim.g.skip_ts_context_commentstring_module = true
