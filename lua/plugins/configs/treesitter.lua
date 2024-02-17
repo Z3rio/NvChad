@@ -30,7 +30,8 @@ local options = {
     "gitcommit",
     "gitattributes",
     "dockerfile",
-    "vimdoc"
+    "vimdoc",
+    "graphql"
   },
 
   highlight = {
