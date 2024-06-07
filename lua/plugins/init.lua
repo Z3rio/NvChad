@@ -31,6 +31,16 @@ local default_plugins = {
       end, 0)
     end,
   },
+  {
+    "NvChad/nvterm",
+    init = function()
+      print("nvterm init")
+      require("core.utils").load_mappings("nvterm")
+    end,
+    config = function ()
+      require("nvterm").setup()
+    end,
+  },
   "nvim-tree/nvim-web-devicons",
   {
     "lukas-reineke/indent-blankline.nvim",
