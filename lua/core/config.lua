@@ -11,6 +11,13 @@ M.ui = {
     border_color = "grey_fg",     -- only applicable for "default" style, use color names from base30 variables
     selected_item_bg = "colored", -- colored / simple
   },
+
+  lsp = {
+    signature = {
+      disabled = false,
+      silent = false
+    }
+  }
 }
 
 M.plugins = ""                                     -- path i.e "custom.plugins", so make custom/plugins.lua file
