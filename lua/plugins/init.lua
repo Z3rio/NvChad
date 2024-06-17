@@ -10,15 +10,6 @@ local default_plugins = {
     end,
   },
   {
-    "Z3rio/Spotify.nvim",
-    lazy = false,
-    dev = true,
-
-    config = function()
-      require("plugins.configs.spotify")
-    end,
-  },
-  {
     "NvChad/nvim-colorizer.lua",
     init = function()
       require("core.utils").lazy_load("nvim-colorizer.lua")
@@ -34,7 +25,6 @@ local default_plugins = {
   {
     "NvChad/nvterm",
     init = function()
-      print("nvterm init")
       require("core.utils").load_mappings("nvterm")
     end,
     config = function ()
@@ -137,15 +127,6 @@ local default_plugins = {
       end, {})
 
       vim.g.mason_binaries_list = opts.ensure_installed
-    end,
-  },
-  {
-    "Z3rio/presence.nvim",
-
-    lazy = false,
-
-    config = function()
-      require("plugins.configs.presence")
     end,
   },
   {
@@ -275,7 +256,7 @@ local default_plugins = {
     config = function(_, opts)
       require("which-key").setup(opts)
     end,
-  },a
+  },
 }
 
 local config = require("core.config")
