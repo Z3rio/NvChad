@@ -3,11 +3,9 @@ local utils = require("core.utils")
 local servers = { "html", "tsserver", "clangd", "cssls" }
 local lspconfig = require("lspconfig")
 
--- export on_attach & capabilities for custom lspconfigs
+utils.load_mappings("lspconfig")
 
 M.on_attach = function(client, bufnr)
-  utils.load_mappings("lspconfig", { buffer = bufnr })
-
   if client.server_capabilities.signatureHelpProvider then
     require("core.signature").setup(client)
   end
